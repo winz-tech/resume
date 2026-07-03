@@ -5,20 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>穎利科技 線上履歷表</title>
 
-<!-- 分享縮圖(LINE/FB/訊息預覽卡) -->
-<meta property="og:title" content="穎利科技 履歷表">
+<link rel="icon" href="https://static.wixstatic.com/media/d228ba_c5d510e5446e4349ab46193801c377c9~mv2.png">
+
+<meta property="og:title" content="穎利科技 線上履歷表">
 <meta property="og:description" content="歡迎參與穎利科技面試，請先填寫線上履歷，節省彼此時間。">
 <meta property="og:image" content="https://static.wixstatic.com/media/d228ba_c5d510e5446e4349ab46193801c377c9~mv2.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="https://static.wixstatic.com/media/d228ba_c5d510e5446e4349ab46193801c377c9~mv2.png">
 <style>
-  html,body{margin:0;padding:0;height:100%;background:#1A1A1A;}
-  iframe{border:none;width:100%;height:100vh;display:block;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;}
+  body{background:linear-gradient(135deg,#1A1A1A 0%,#2b0206 60%,#3a0206 100%);display:flex;align-items:center;justify-content:center;padding:24px;}
+  .inner{max-width:560px;text-align:center;}
+  .logo{height:70px;object-fit:contain;margin-bottom:34px;animation:breath 3s ease-in-out infinite;}
+  @keyframes breath{0%,100%{transform:scale(1);opacity:.92;}50%{transform:scale(1.06);opacity:1;}}
+  .type{color:#fff;font-size:20px;line-height:2;font-weight:500;min-height:200px;letter-spacing:.5px;}
+  @media(max-width:520px){.type{font-size:16px;line-height:1.9;}.logo{height:54px;}}
+  .cursor{display:inline-block;width:2px;background:#E30613;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .btn{margin-top:34px;padding:14px 44px;background:#E30613;color:#fff;border:none;border-radius:30px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(227,6,19,.4);opacity:0;transform:translateY(10px);transition:.5s;font-family:inherit;text-decoration:none;display:inline-block;}
+  .btn.show{opacity:1;transform:translateY(0);}
+  .btn:hover{background:#c00510;transform:translateY(-2px);}
 </style>
 </head>
 <body>
-<iframe src="你的GAS網址/exec" allow="camera; microphone"></iframe>
+<div class="inner">
+  <img class="logo" src="https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d" alt="WINZ 穎利科技">
+  <div class="type" id="type"></div>
+  <a class="btn" id="btn" href="https://script.google.com/macros/s/AKfycbzhnP5shUWMQnlz-V4wlNEi-FVC_u7uqMwjKzoqTV0233vLeJZxNoUHR4s8vvw1BnE/exec">開始填寫 🐾</a>
+</div>
+<script>
+  var LINES=['歡迎參與 穎利科技 的面試','為了讓面試更順利、節省彼此的時間','請您先花幾分鐘填寫線上履歷','我們會在收到後盡快與您聯繫'];
+  var box=document.getElementById('type');
+  var li=0,ci=0,html='';
+  function tick(){
+    if(li>=LINES.length){box.innerHTML=html;document.getElementById('btn').classList.add('show');return;}
+    var line=LINES[li];
+    if(ci<=line.length){box.innerHTML=html+line.slice(0,ci)+'<span class="cursor">&nbsp;</span>';ci++;setTimeout(tick,90);}
+    else{html+=line+'<br>';li++;ci=0;setTimeout(tick,450);}
+  }
+  tick();
+</script>
 </body>
 </html>
